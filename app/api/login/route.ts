@@ -8,18 +8,21 @@ export async function POST(request: Request) {
 
   if (!sitePassword) {
     return NextResponse.redirect(
-      new URL("/login?error=Настройка пароля не найдена", request.url)
+      new URL("/login?error=Настройка пароля не найдена", request.url),
+      303
     );
   }
 
   if (password !== sitePassword) {
     return NextResponse.redirect(
-      new URL("/login?error=Неверный пароль", request.url)
+      new URL("/login?error=Неверный пароль", request.url),
+      303
     );
   }
 
   const response = NextResponse.redirect(
-    new URL("/", request.url)
+    new URL("/", request.url),
+    303
   );
 
   response.cookies.set("bookshelf_access", "granted", {
